@@ -6,9 +6,9 @@ LMS (or Learning Management Software) specifically for tech content isn't that e
 
 The motivation behind this project is to allow technical content creators (ie, coders) to do the following :
 
-[ ] Course content creation
-  [ ] Video courses
-  [ ] One-off video walkthroughs
-[ ] Control course publication
-[ ] Monetize courseware via subscriptions
-[ ] Track content consumption metrics
+- [ ] Course content creation
+  - [ ] Video courses
+  - [ ] One-off video walkthroughs
+- [ ] Control course publication
+- [ ] Monetize courseware via subscriptions
+- [ ] Track content consumption metrics
