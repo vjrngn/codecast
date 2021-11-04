@@ -9,7 +9,7 @@ of the project grows.
 
 1. Videos
   - uuid
-  - name
+  - title
 	- url
   - description 
 	- published\_at
@@ -25,7 +25,7 @@ A video may be associated with any number of tags.
   - title
 	- description
 	- published\_at
-	- is\_free
+	- listed_price
 
 A course is a collection of videos. A course may be free or paid.
 

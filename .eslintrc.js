@@ -7,13 +7,14 @@ module.exports = {
     es2021: true,
     mocha: true
   },
-  extends: ['standard'],
+  extends: ['standard', 'typescript-eslint'],
   parserOptions: {
     ecmaVersion: 12
   },
   rules: {
     semi: ['error', 'always'],
-    'space-before-function-paren': 'off'
+    'space-before-function-paren': 'off',
+    indent: [2, "tab"],
   },
   overrides: [
     {
@@ -27,6 +28,6 @@ module.exports = {
       rules: {
         camelcase: 'off'
       }
-    }
+    },
   ]
 };

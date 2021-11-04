@@ -7,8 +7,9 @@
     "start": "tsc && node dist/server.js",
     "start:dev": "nodemon src/server.ts",
     "migration:create": "typeorm migration:create --name",
-    "migration:run": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:run",
-    "migration:revert": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:revert"
+    "entity:create": "typeorm entity:create --name",
+    "migration:run": "ts-node $(yarn bin typeorm) migration:run",
+    "migration:revert": "ts-node $(yarn bin typeorm) migration:revert"
   },
   "dependencies": {
     "dotenv": "^8.2.0",

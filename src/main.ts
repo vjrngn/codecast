@@ -1,11 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
 import { ApplicationConfiguration } from './config';
+import { connect } from './database';
 
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 
 module.exports = async function (config: ApplicationConfiguration) {
+  await connect(config);
   const app = express();
 
   // view engine setup
