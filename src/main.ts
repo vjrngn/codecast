@@ -1,10 +1,10 @@
-import { NextFunction, Request, Response } from 'express';
+import express, { NextFunction, Request, Response } from 'express';
+import path from 'path';
+import createError from 'http-errors';
 import { ApplicationConfiguration } from './config';
 import { connect } from './database';
+import adminRouter from './routes/admin';
 
-const createError = require('http-errors');
-const express = require('express');
-const path = require('path');
 
 module.exports = async function (config: ApplicationConfiguration) {
   await connect(config);
@@ -17,6 +17,10 @@ module.exports = async function (config: ApplicationConfiguration) {
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(express.static(path.join(__dirname, 'public')));
+
+  // Register routes
+  const adminRoutes = adminRouter();
+  app.use(adminRoutes.path, adminRoutes.router);
 
   // catch 404 and forward to error handler
   app.use(function (request: Request, response: Response, next: NextFunction) {
