@@ -1,7 +1,7 @@
-This document outlines the features, data model etc of 'codecast'. It serves to be a single
+This document outlines the features, data model etc of codecast. It serves to be a single
 pane of glass for a high level view of the architecture of the project.
 
-This is an evolving document and is prone to change as the high level design and requirements
+This is an evolving document and will change as the high level design and requirements
 of the project grows.
 
 
@@ -11,6 +11,7 @@ of the project grows.
   - uuid
   - name
 	- url
+  - description 
 	- published\_at
 
 Videos can exist by themselves and don't need to be part of a course. A video is the "base" unit
