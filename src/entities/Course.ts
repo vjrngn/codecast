@@ -14,8 +14,8 @@ export class Course {
   @Column({ name: 'listed_price' })
   listedPrice: number;
 
-  @Column({ name: 'published_at', type: 'timestamp' })
-  publishedAt: Date;
+  @Column({ name: 'publish_at', type: 'timestamp' })
+  publishAt: Date;
 
   @Column({ name: 'created_at', type: 'timestamp' })
   createdAt: Date;

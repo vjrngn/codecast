@@ -1,0 +1,19 @@
+{% extends "admin/layout.twig" %}
+
+{% block body %}
+	<div class="mt-4">
+		<input type="search" class="form-control" placeholder="Filter videos"/>
+	</div>
+	<div class="mt-4">
+		<div class="d-flex flex-row">
+			{% for video in videos %}
+				<div class="card me-3" style="width: 18rem;">
+					<video style="height: 160px; object-fit: cover" src={{ video.url }} alt={{ video.title }} class="card-img-top" controls></video>
+					<div class="card-body">
+						<p class="card-text">{{ video.title }}</p>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

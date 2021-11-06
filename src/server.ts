@@ -4,6 +4,9 @@ import { config } from './config';
 
 const http = require('http');
 const initApp = require('./main');
+import Logger from './logging/logger';
+
+const logger = Logger('Server');
 
 initApp(config).then((app: Application) => {
   /**
@@ -23,13 +26,13 @@ initApp(config).then((app: Application) => {
   server.listen(port);
   server.on('error', (error: any) => {
     if (error.code === 'EADDRINUSE') {
-      console.error(`${process.env.PORT} is already in use`);
+      logger.error(`${process.env.PORT} is already in use`);
       process.exit(1);
     } else {
       throw error;
     }
   });
   server.on('listening', () => {
-    console.log(`Server listening on port ${port}`);
+    logger.info(`Server listening on port ${port}`);
   });
 });

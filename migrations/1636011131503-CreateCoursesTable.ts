@@ -24,7 +24,7 @@ export class CreateCoursesTable1636011131503 implements MigrationInterface {
 					isNullable: true
 				},
 				{
-					name: 'publised_at',
+					name: 'publish_at',
 					type: 'timestamp',
 					isNullable: true
 				},

@@ -14,9 +14,9 @@ export class Video {
   @Column({ type: 'text' })
   description: string;
 
-  @Column({ name: 'published_at', type: 'timestamp' })
-  publishedAt?: Date;
+  @Column({ name: 'publish_at' })
+  publishAt?: string;
 
-  @CreateDateColumn({ name: 'created_at', type: 'timestamp' })
-  createdAt: Date;
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: string;
 }

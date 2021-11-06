@@ -28,7 +28,7 @@ export class CreateVideosTable1636001724402 implements MigrationInterface {
           isNullable: true
         },
         {
-          name: 'publised_at',
+          name: 'publish_at',
           type: 'timestamp',
           isNullable: true
         },

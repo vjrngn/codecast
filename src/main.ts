@@ -4,10 +4,19 @@ import createError from 'http-errors';
 import { ApplicationConfiguration } from './config';
 import { connect } from './database';
 import adminRouter from './routes/admin';
+import { VideoService } from './services/video-service';
+import { getRepository } from 'typeorm';
+import { Video } from './entities/Video';
+import LocalFileService from './services/file-service/local-file-service';
 
 
 module.exports = async function (config: ApplicationConfiguration) {
   await connect(config);
+
+  const videoService = new VideoService(getRepository(Video), new LocalFileService({
+    destination: path.join(__dirname, 'public', 'uploads')
+  }));
+
   const app = express();
 
   // view engine setup
@@ -19,7 +28,7 @@ module.exports = async function (config: ApplicationConfiguration) {
   app.use(express.static(path.join(__dirname, 'public')));
 
   // Register routes
-  const adminRoutes = adminRouter();
+  const adminRoutes = adminRouter({ videoService });
   app.use(adminRoutes.path, adminRoutes.router);
 
   // catch 404 and forward to error handler

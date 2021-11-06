@@ -1,0 +1,103 @@
+{% extends "admin/layout.twig" %}
+
+{% block styles %}
+	<link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>
+	<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+	<script>
+		Dropzone.options = {
+			url: '/admin/videos/create',
+			uploadForm: {
+				paramName: 'video',
+				autoProcessQueue: false,
+				allowMultiple: false,
+				init: function() {
+					const dropzone = this;
+					document
+						.querySelector("button[type=submit]")
+						.addEventListener("click", function (event) {
+							event.preventDefault();
+							event.stopPropagation();
+							dropzone.processQueue();
+							console.log(dropzone);
+						});
+				}
+			}
+		};
+	</script>
+{% endblock %}
+
+{% block body %}
+	<div class="text-center mt-3">
+		<div id="video-preview"></div>
+		<div class="progress" hidden>
+			<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+		</div>
+	</div>
+
+	<form class="mt-3" method="post" enctype="multipart/form-data">
+
+		<div class="mb-3">
+			<label for="video" class="form-label">Select Video</label>
+			<input name="video" type="file" class="form-control" id="video" accept="video/mp4">
+		</div>
+
+		<div class="mb-3">
+			<label for="title" class="form-label">Title</label>
+			<input name="title" type="text" class="form-control" id="title" placeholder="name@example.com">
+		</div>
+
+		<div class="mb-3">
+			<label for="description" class="form-label">Description</label>
+			<textarea name="description" class="form-control cke-editor" id="description"></textarea>
+		</div>
+
+		<button type="submit" class="btn btn-outline-primary">Upload</button>
+	</form>
+{% endblock %}
+
+{% block scripts %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdn.ckeditor.com/ckeditor5/31.0.0/classic/ckeditor.js"></script>
+	<script>
+		(() => {
+			const progressBar = document.querySelector('.progress-bar');
+			const preview = document.querySelector('#video-preview');
+
+			function previewVideo(file) {
+				progressBar.parentElement.hidden = false;
+				if (!file) {
+					console.error('invalid file');
+					return;
+				};
+
+				const reader = new FileReader();
+				reader.addEventListener('progress', function (e) {
+					const progress = Math.round((e.loaded / e.total) * 100);
+					progressBar.style.width = `${progress}%`;
+					progressBar.innerText = `${progress}%`;
+				});
+
+				reader.addEventListener('load', function () {
+					const videoElement = document.createElement('video');
+					videoElement.src = reader.result;
+					videoElement.controls = true;
+					videoElement.classList.add('rounded', 'img-fluid');
+					preview.appendChild(videoElement);
+
+					progressBar.style.width = '0%';
+					progressBar.parentElement.hidden = true;
+				});
+
+				reader.readAsDataURL(file);
+			}
+
+			const form = document.querySelector('form');
+			form.addEventListener('change', function (e) {
+				const { files } = e.target;
+				previewVideo(files[0]);
+			});
+			form.addEventListener('submit', function(e) {});
+			ClassicEditor.create(document.querySelector('.cke-editor'));
+		})();
+	</script>
+{% endblock %}
