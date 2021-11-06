@@ -1,8 +1,8 @@
 import fs, { createReadStream, createWriteStream } from 'fs';
 import mkdirp from 'mkdirp';
 import { join } from 'path';
-import Logger from '../../../logging/logger';
-import { Result } from "../../../result";
+import Logger from '../../logging/logger';
+import { Result } from "../../result";
 import { Storage, StoredFile } from "./storage";
 
 export interface DiskStorageOptions {
@@ -50,30 +50,6 @@ export class DiskStorage implements Storage {
 
         resolve(new Result(storedFile, null));
       });
-
-      // outStream.on('error', (error) => {
-      //   this.logger.error('Failed writing file to disk', error);
-
-      //   reject(new Result(null, {
-      //     message: 'Failed storing file to disk',
-      //     error
-      //   }))
-      // });
-
-      // outStream.on('finish', () => {
-      //   this.logger.debug('Wrote file to disk', {
-      //     destination: this.options.destination
-      //   });
-
-      //   const storedFile = {
-      //     path: finalPath,
-      //     size: outStream.bytesWritten,
-      //   };
-
-      //   resolve(new Result(storedFile, null));
-      // });
-
-      // data.pipe(outStream);
     });
   }
 

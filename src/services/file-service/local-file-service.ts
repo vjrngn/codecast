@@ -1,7 +1,7 @@
 import Logger from "../../logging/logger";
 import { Result } from "../../result";
 import { FileService, UploadDTO, UploadedFile } from "./file-service";
-import { DiskStorage } from "./storage/disk-storage";
+import { DiskStorage } from "../storage-service/disk-storage";
 
 interface FileServiceOptions {
   destination: string;

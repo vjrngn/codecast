@@ -4,7 +4,7 @@ import createError from 'http-errors';
 import { ApplicationConfiguration } from './config';
 import { connect } from './database';
 import adminRouter from './routes/admin';
-import { VideoService } from './services/video-service';
+import { VideoService } from './services/video-service/video-service';
 import { getRepository } from 'typeorm';
 import { Video } from './entities/Video';
 import LocalFileService from './services/file-service/local-file-service';

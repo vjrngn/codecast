@@ -2,7 +2,7 @@ import { Request, Response, Router } from 'express';
 import moment from 'moment';
 import multer from 'multer';
 import { RouteDefinition } from '.';
-import { VideoService } from '../services/video-service';
+import { VideoService } from '../services/video-service/video-service';
 
 const upload = multer();
 

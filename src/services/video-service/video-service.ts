@@ -1,9 +1,9 @@
 import { Repository } from "typeorm";
 import { v4 } from 'uuid';
-import { Video } from "../entities/Video";
-import Logger from "../logging/logger";
-import { Result } from "../result";
-import { FileService } from "./file-service/file-service";
+import { Video } from "../../entities/Video";
+import Logger from "../../logging/logger";
+import { Result } from "../../result";
+import { FileService } from "../file-service/file-service";
 
 export interface VideoDTO {
   title: string;
