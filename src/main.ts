@@ -8,6 +8,7 @@ import { VideoService } from './services/video-service/video-service';
 import { getRepository } from 'typeorm';
 import { Video } from './entities/Video';
 import LocalFileService from './services/file-service/local-file-service';
+import { registry } from './routes';
 
 
 module.exports = async function (config: ApplicationConfiguration) {
@@ -18,6 +19,7 @@ module.exports = async function (config: ApplicationConfiguration) {
   }));
 
   const app = express();
+  const routeRegistry = registry(app);
 
   // view engine setup
   app.set('views', path.join(__dirname, 'views'));
@@ -27,9 +29,16 @@ module.exports = async function (config: ApplicationConfiguration) {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.static(path.join(__dirname, 'public')));
 
+  app.use(function (request: Request, response: Response, next: NextFunction) {
+    response.locals.isActiveRoute = function (path: string) {
+      const currentPath = request.baseUrl + request.path;
+      return path === currentPath;
+    };
+    next();
+  });
+
   // Register routes
-  const adminRoutes = adminRouter({ videoService });
-  app.use(adminRoutes.path, adminRoutes.router);
+  routeRegistry.register(adminRouter({ videoService }));
 
   // catch 404 and forward to error handler
   app.use(function (request: Request, response: Response, next: NextFunction) {

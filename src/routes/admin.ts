@@ -48,6 +48,7 @@ export default ({ videoService }: Dependencies): RouteDefinition => {
   });
 
   return {
+    name: 'admin',
     path: '/admin',
     router: router,
   }

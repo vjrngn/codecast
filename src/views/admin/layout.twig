@@ -14,10 +14,10 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 							<li class="nav-item">
-								<a class="nav-link active" aria-current="page" href="/admin/courses">Courses</a>
+								<a class="nav-link {{ isActiveRoute('/admin/courses') ? 'active' : '' }}" aria-current="page" href="/admin/courses">Courses</a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="/admin/videos">Videos</a>
+								<a class="nav-link {{ isActiveRoute('/admin/videos') ? 'active' : '' }}" href="/admin/videos">Videos</a>
 							</li>
 						</ul>
 					</div>
